@@ -144,17 +144,22 @@ def check_answer(user_answer, correct_answer):
         return False
 
 def show_results(time_elapsed, score):
-    print(f"you took {time_elapsed} seconds to finish this quiz")
+    print(f"you took {time_elapsed:.2f} seconds to finish this quiz")
     time.sleep(0.25)
     if score == 10:
+        print(score)
         print("outstanding")
     elif score >= 7:
+        print(score)
         print("great")
     elif score >= 5:
+        print(score)
         print("good job")
     elif score >= 3:
+        print(score)
         print("start studying")
     else:
+        print(score)
         print("horrible")
 
 def main_quiz():
@@ -173,7 +178,7 @@ def main_quiz():
         else:
             print(f"Thats incorrect. The correct answer is {q['Answer']}")
     end_time = time.time()
-    time_elapsed = (starting_time - end_time)
+    time_elapsed = (end_time - starting_time)
     show_results(time_elapsed, score)
 
 
