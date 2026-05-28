@@ -85,3 +85,96 @@ Science = [
 ]
 
 all_subjects = Science + Geography + History
+
+def start_screen():
+    print("*******" * 5)
+    print("Welcome to the BASIC quiz")
+    time.sleep(0.5)
+    print("*******" * 5)
+    print("If you do bad here you highkey suck dawg idek atp")
+    time.sleep(1)
+    print("*******" * 5)
+    print("all you have to do is choose what subject you wanna get quizzed on")
+    print("and then answer the questions presented to you")
+    time.sleep(0.5)
+    print("*******" * 5)
+    print("After you finish the quiz you will be presented with your score and how long it took you to finish the quiz")
+    time.sleep(0.25)
+    print("*******" * 5)
+    time.sleep(0.25)
+    print("*******" * 5)
+    time.sleep(0.25)
+    print("*******" * 5)
+    time.sleep(0.25)
+    print("*******" * 5)
+    print("So lets get started")
+    
+
+def choose_quiz():
+    print("please enter a number corresponding to one of the following choices:")
+    print("1. Science \n2. Geography \n3. History \n4. all_subjects")
+    try:
+        choice = int(input( ))
+    except:
+        "please enter a number"
+        choose_quiz()
+
+    if choice == 1 or choice == 2 or choice == 3 or choice == 4:
+        return choice
+    else:
+        print("please enter 1, 2, 3 or 4")
+        choose_quiz()
+
+def get_questions(choice):
+    if choice == 1:
+        questions = Science
+    elif choice == 2: 
+        questions = Geography
+    elif choice == 3:
+        questions = History
+    elif choice == 4:
+        questions = all_subjects
+    return random.sample(questions,10)
+
+
+def check_answer(user_answer, correct_answer):
+    if user_answer.strip().lower() == correct_answer.strip().lower():
+        return True
+    else:
+        return False
+
+def show_results(time_elapsed, score):
+    print(f"you took {time_elapsed} seconds to finish this quiz")
+    time.sleep(0.25)
+    if score == 10:
+        print("outstanding")
+    elif score >= 7:
+        print("great")
+    elif score >= 5:
+        print("good job")
+    elif score >= 3:
+        print("start studying")
+    else:
+        print("horrible")
+
+def main_quiz():
+    start_screen()
+    choice = choose_quiz()
+    questions = get_questions(choice)
+    score = 0
+    starting_time = time.time()
+    for q in questions:
+        print(q["Question"])
+        user_answer = input("")
+        result = check_answer(user_answer, q["Answer"])
+        if result == True:
+            print("Thats correct")
+            score += 1
+        else:
+            print(f"Thats incorrect. The correct answer is {q['Answer']}")
+    end_time = time.time()
+    time_elapsed = (starting_time - end_time)
+    show_results(time_elapsed, score)
+
+
+main_quiz()
